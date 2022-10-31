@@ -26,6 +26,7 @@ class App extends Component {
     this.setState({ reservations: [...this.state.reservations, newReservation] });
   };
   render() {
+   
     if (!this.state.reservations) {
       return <h2 className="error-message">{this.state.error}</h2>;
     }
