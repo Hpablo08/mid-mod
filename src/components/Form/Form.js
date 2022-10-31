@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { postNewReservation } from "../../api";
 
 class Form extends Component {
   constructor(props) {
@@ -20,12 +21,28 @@ class Form extends Component {
       ...this.state, 
     };
     this.props.addReservation(newReservation); 
-    this.clearInputs(); 
+    this.getData()
+    // this.clearInputs(); 
+   
   };
+  getData= () => {
+    let userData = {
+      id: Date.now(),
+      name: this.state.name,
+      date: this.state.date,
+      time: this.state.time,
+      number: this.state.number,
+    };
+    postNewReservation(userData);
+    console.log(userData);
+     this.clearInputs();
+  }
 
   clearInputs = () => {
+    console.log('run')
     this.setState({ name: "", time: "", number: "", date: "" });
   };
+
   render() {
     return (
       <form className="reservation-form">
