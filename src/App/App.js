@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { fetchAllReservations } from '../api';
-
+import Reservations from '../components/Reservations/Reservations';
 class App extends Component {
   constructor() {
     super()
@@ -13,7 +13,7 @@ class App extends Component {
     try {
       const reservationList = await fetchAllReservations()
       const data = await reservationList.json()
-      this.setState({reservations: data})
+      this.setState({ reservations: data });
 
     } catch {
       this.setState({
@@ -22,7 +22,10 @@ class App extends Component {
       console.log(this.state.error)
     }
   }
-  render() {
+  render() {   
+ if (!this.state.reservations) {
+   return <h2 className="error-message">{this.state.error}</h2>;
+ }
     return (
       <div className="App">
         <h1 className='app-title'>Turing Cafe Reservations</h1>
@@ -30,7 +33,7 @@ class App extends Component {
 
         </div>
         <div className='resy-container'>
-          
+          <Reservations reservations={this.state.reservations}/>
         </div>
       </div>
     )
