@@ -4,7 +4,7 @@ describe('main page flows', () => {
       fixture: "mockReservations.json",
     }).as("reservations");
 
-    cy.visit("http://localhost:3000/?name=Hazel&date=04%2F22&time=6&number=5");
+    cy.visit("http://localhost:3000/");
   });
   it('Should be able to view the home page', () => {
     cy.get('.app-title').contains('Turing Cafe Reservations')
